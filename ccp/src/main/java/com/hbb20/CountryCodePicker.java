@@ -26,15 +26,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import io.michaelrocks.libphonenumber.android.NumberParseException;
-import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
-import io.michaelrocks.libphonenumber.android.Phonenumber;
 
 /**
  * Created by hbb20 on 11/1/16.
@@ -2145,7 +2145,7 @@ public class CountryCodePicker extends RelativeLayout {
 
     private PhoneNumberUtil getPhoneUtil() {
         if (phoneUtil == null) {
-            phoneUtil = PhoneNumberUtil.createInstance(context);
+            phoneUtil = PhoneNumberUtil.getInstance();
         }
         return phoneUtil;
     }
