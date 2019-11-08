@@ -974,8 +974,12 @@ public class CountryCodePicker extends RelativeLayout {
 
             //text watcher stops working when it finds non digit character in previous phone code. This will reset its function
             editText_registeredCarrierNumber.setText("");
-            editText_registeredCarrierNumber.setText(digitsValue);
-            editText_registeredCarrierNumber.setSelection(editText_registeredCarrierNumber.getText().length());
+            try {
+                editText_registeredCarrierNumber.setText(digitsValue);
+                editText_registeredCarrierNumber.setSelection(editText_registeredCarrierNumber.getText().length());
+            } catch (Exception ex) {
+                Log.e(TAG, "Error when try to set text to editText_registeredCarrierNumber", ex);
+            }
         } else {
             if (editText_registeredCarrierNumber == null) {
                 Log.v(TAG, "updateFormattingTextWatcher: EditText not registered " + selectionMemoryTag);
