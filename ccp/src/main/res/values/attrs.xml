@@ -37,6 +37,10 @@
 
         </attr>
 
+
+        <!--CCP dimension properties-->
+        <attr name="ccp_padding" format="dimension" />
+
         <!--CCP bool properties-->
         <attr name="ccp_showNameCode" format="boolean" />
         <attr name="ccp_showFlag" format="boolean" />
@@ -62,7 +66,8 @@
         <attr name="ccpDialog_fastScroller_bubbleColor" format="color" />
         <attr name="ccpDialog_fastScroller_handleColor" format="color" />
         <attr name="ccpDialog_fastScroller_bubbleTextAppearance" format="reference" />
-        <attr name="ccpDialog_backgroundColor" format="color" />
+        <attr name="ccpDialog_backgroundColor" format="reference" />
+        <attr name="ccpDialog_background" format="reference" />
         <attr name="ccpDialog_textColor" format="color" />
         <attr name="ccpDialog_searchEditTextTint" format="color" />
         <attr name="ccpDialog_showCloseIcon" format="boolean" />
@@ -90,19 +95,23 @@
             <enum name="INDONESIA" value="16" />
             <enum name="ITALIAN" value="17" />
             <enum name="JAPANESE" value="18" />
-            <enum name="KOREAN" value="19" />
-            <enum name="POLISH" value="20" />
-            <enum name="PORTUGUESE" value="21" />
-            <enum name="PUNJABI" value="22" />
-            <enum name="RUSSIAN" value="23" />
-            <enum name="SLOVAK" value="24" />
-            <enum name="SPANISH" value="25" />
-            <enum name="SWEDISH" value="26" />
-            <enum name="TURKISH" value="27" />
-            <enum name="UKRAINIAN" value="28" />
-            <enum name="URDU" value="29" />
-            <enum name="UZBEK" value="30" />
-            <enum name="VIETNAMESE" value="31" />
+            <enum name="KAZAKH" value="19" />
+            <enum name="KOREAN" value="20" />
+            <enum name="MARATHI" value="21"/>
+            <enum name="POLISH" value="22" />
+            <enum name="PORTUGUESE" value="23" />
+            <enum name="PUNJABI" value="24" />
+            <enum name="RUSSIAN" value="25" />
+            <enum name="SLOVAK" value="26" />
+            <enum name="SLOVENIAN" value="27" />
+            <enum name="SPANISH" value="28" />
+            <enum name="SWEDISH" value="29" />
+            <enum name="TAGALOG" value="30" />
+            <enum name="TURKISH" value="31" />
+            <enum name="UKRAINIAN" value="32" />
+            <enum name="URDU" value="33" />
+            <enum name="UZBEK" value="34" />
+            <enum name="VIETNAMESE" value="35" />
         </attr>
 
         <attr name="ccp_countryAutoDetectionPref" format="enum">

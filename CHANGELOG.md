@@ -4,9 +4,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Next Release]
+- Nothing so far
 
-## [2.3.2] - 2019-09-10
+## 2.4.0 - 2020-05-25
+### Added
+- Tagalog/Filipino language support ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/392)) by [Noor ul Ain Ali](https://github.com/noorulain17)
+- Return selected country flag resource id ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/389)) by [Giorgi](https://github.com/gusakovgiorgi)
+
+### Fixed
+- Optimized resources  ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/397)) by [Daniel Gomez](https://github.com/danielgomezrico)
+
+## 2.3.9 - 2020-05-08
+### Fixed
+- US Flag Image to show correctly with border ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/396))
+
+## 2.3.8 - 2020-02-06
+### Added
+- Slovenian language support by [pastafarianGit](https://github.com/pastafarianGit) ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/373))
+
+## 2.3.7 - 2020-01-23
+### Fixed
+- Fixed [issue](https://github.com/hbb20/CountryCodePickerProject/issues/370) 
+
+## 2.3.6 - 2020-01-20
+### Added
+- Marathi language support [Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/368) by [Kaustubh Kulkarni](https://github.com/kaustubhk24)
+- `ccp_padding` attribute [Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/369) by [mina george](https://github.com/minageorge5080)
+### Fixed
+- Typo 
+
+## 2.3.5 - 2019-12-30
+### Added
+- Adds `ccpDialog_background` property to set custom background resource for CCP Dialog.
+
+## 2.3.4 - 2019-11-13
+### Fixes
+- Allow to set validity change listener to null ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/357) by [Michael Gray](https://github.com/mgray88))
+
+## 2.3.3 - 2019-09-10
+### Added
+- Support for Kazakh ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/352) by [Zhanbolat Raimbekov](https://github.com/janbolat))
+
+## 2.3.2 - 2019-09-10
 ### Added
 - Changelog.md file ([Pull Request](https://github.com/hbb20/CountryCodePickerProject/pull/340) by [Antoine Jaury](https://github.com/Ajojo44))
 ### Changed

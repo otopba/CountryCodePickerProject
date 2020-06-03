@@ -26,6 +26,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
@@ -66,6 +69,8 @@ public class CountryCodePicker extends RelativeLayout {
     CountryCodePicker codePicker;
     TextGravity currentTextGravity;
     String originalHint = "";
+    int ccpPadding;
+
     // see attr.xml to see corresponding values for pref
     AutoDetectionPref selectedAutoDetectionPref = AutoDetectionPref.SIM_NETWORK_LOCALE;
     PhoneNumberUtil phoneUtil;
@@ -123,7 +128,7 @@ public class CountryCodePicker extends RelativeLayout {
     private DialogEventsListener dialogEventsListener;
     private CustomDialogTextProvider customDialogTextProvider;
     private int fastScrollerHandleColor = 0;
-    private int dialogBackgroundColor, dialogTextColor, dialogSearchEditTextTintColor;
+    private int dialogBackgroundResId, dialogBackgroundColor, dialogTextColor, dialogSearchEditTextTintColor;
     private int fastScrollerBubbleTextAppearance = 0;
     private CCPCountryGroup currentCountryGroup;
     private View.OnClickListener customClickListener;
@@ -287,6 +292,10 @@ public class CountryCodePicker extends RelativeLayout {
             //international formatting only
             internationalFormattingOnly = a.getBoolean(R.styleable.CountryCodePicker_ccp_internationalFormattingOnly, true);
 
+            // dialog content padding.
+            ccpPadding = (int) a.getDimension(R.styleable.CountryCodePicker_ccp_padding, context.getResources().getDimension(R.dimen.ccp_padding));
+            relativeClickConsumer.setPadding(ccpPadding, ccpPadding, ccpPadding, ccpPadding);
+
             //example number hint type
             int hintNumberTypeIndex = a.getInt(R.styleable.CountryCodePicker_ccp_hintExampleNumberType, 0);
             hintExampleNumberType = PhoneNumberType.values()[hintNumberTypeIndex];
@@ -438,6 +447,7 @@ public class CountryCodePicker extends RelativeLayout {
 
             //dialog colors
             setDialogBackgroundColor(a.getColor(R.styleable.CountryCodePicker_ccpDialog_backgroundColor, 0));
+            setDialogBackground(a.getResourceId(R.styleable.CountryCodePicker_ccpDialog_background, 0));
             setDialogTextColor(a.getColor(R.styleable.CountryCodePicker_ccpDialog_textColor, 0));
             setDialogSearchEditTextTintColor(a.getColor(R.styleable.CountryCodePicker_ccpDialog_searchEditTextTint, 0));
 
@@ -1207,6 +1217,19 @@ public class CountryCodePicker extends RelativeLayout {
         this.dialogBackgroundColor = dialogBackgroundColor;
     }
 
+    int getDialogBackgroundResId() {
+        return dialogBackgroundResId;
+    }
+
+    /**
+     * This will be color of dialog background
+     *
+     * @param dialogBackgroundResId
+     */
+    public void setDialogBackground(@IdRes int dialogBackgroundResId) {
+        this.dialogBackgroundResId = dialogBackgroundResId;
+    }
+
     int getDialogSearchEditTextTintColor() {
         return dialogSearchEditTextTintColor;
     }
@@ -1695,6 +1718,17 @@ public class CountryCodePicker extends RelativeLayout {
     }
 
     /**
+     * To get selected country image resource id
+     *
+     * @return integer value of the selected country flag reource.
+     * For example for georgia it returns R.drawable.flag_georgia
+     */
+    @DrawableRes
+    public int getSelectedCountryFlagResourceId(){
+        return getSelectedCountry().flagResID;
+    }
+
+    /**
      * This will set country with @param countryCode as country code, in CCP
      *
      * @param countryCode a valid country code.
@@ -1787,7 +1821,7 @@ public class CountryCodePicker extends RelativeLayout {
             return getPhoneUtil().format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164).substring(1);
         } catch (NumberParseException e) {
             Log.e(TAG, "getFullNumber: Could not parse number");
-            return getSelectedCountryCode();
+            return getSelectedCountryCode() + PhoneNumberUtil.normalizeDigitsOnly(editText_registeredCarrierNumber.getText().toString());
         }
     }
 
@@ -1824,7 +1858,7 @@ public class CountryCodePicker extends RelativeLayout {
             return "+" + getPhoneUtil().format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL).substring(1);
         } catch (NumberParseException e) {
             Log.e(TAG, "getFullNumber: Could not parse number");
-            return getSelectedCountryCode();
+            return getFullNumberWithPlus();
         }
     }
 
@@ -1834,13 +1868,7 @@ public class CountryCodePicker extends RelativeLayout {
      * @return Full number is countryCode + carrierNumber i.e countryCode= 91 and carrier number= 8866667722, this will return "+918866667722"
      */
     public String getFullNumberWithPlus() {
-        try {
-            Phonenumber.PhoneNumber phoneNumber = getEnteredPhoneNumber();
-            return getPhoneUtil().format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164);
-        } catch (NumberParseException e) {
-            Log.e(TAG, "getFullNumber: Could not parse number");
-            return getSelectedCountryCode();
-        }
+        return "+" + getFullNumber();
     }
 
     /**
@@ -2082,7 +2110,7 @@ public class CountryCodePicker extends RelativeLayout {
      */
     public void setPhoneNumberValidityChangeListener(PhoneNumberValidityChangeListener phoneNumberValidityChangeListener) {
         this.phoneNumberValidityChangeListener = phoneNumberValidityChangeListener;
-        if (editText_registeredCarrierNumber != null) {
+        if (editText_registeredCarrierNumber != null && phoneNumberValidityChangeListener != null) {
             reportedValidity = isValidFullNumber();
             phoneNumberValidityChangeListener.onValidityChanged(reportedValidity);
         }
@@ -2340,6 +2368,12 @@ public class CountryCodePicker extends RelativeLayout {
         customClickListener = clickListener;
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        CountryCodeDialog.clear();
+        super.onDetachedFromWindow();
+    }
+
     /**
      * Update every time new language is supported #languageSupport
      */
@@ -2365,14 +2399,18 @@ public class CountryCodePicker extends RelativeLayout {
         INDONESIA("in"),
         ITALIAN("it"),
         JAPANESE("ja"),
+        KAZAKH("kk"),
         KOREAN("ko"),
+        MARATHI("mr"),
         POLISH("pl"),
         PORTUGUESE("pt"),
         PUNJABI("pa"),
         RUSSIAN("ru"),
         SLOVAK("sk"),
+        SLOVENIAN("si"),
         SPANISH("es"),
         SWEDISH("sv"),
+        TAGALOG("tl"),
         TURKISH("tr"),
         UKRAINIAN("uk"),
         URDU("ur"),
@@ -2530,11 +2568,5 @@ public class CountryCodePicker extends RelativeLayout {
         String getCCPDialogSearchHintText(Language language, String defaultSearchHintText);
 
         String getCCPDialogNoResultACK(Language language, String defaultNoResultACK);
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        CountryCodeDialog.clear();
-        super.onDetachedFromWindow();
     }
 }
