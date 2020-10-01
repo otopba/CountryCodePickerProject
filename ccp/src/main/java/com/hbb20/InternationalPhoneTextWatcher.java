@@ -7,8 +7,8 @@ import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 
-import com.google.i18n.phonenumbers.AsYouTypeFormatter;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import io.michaelrocks.libphonenumber.android.AsYouTypeFormatter;
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 
 
 //Reference https://stackoverflow.com/questions/32661363/using-phonenumberformattingtextwatcher-without-typing-country-calling-code to solve formatting issue
@@ -41,8 +41,8 @@ public class InternationalPhoneTextWatcher implements TextWatcher {
      *                         where the phone number is being entered.
      * @param countryPhoneCode Phone code of country. https://countrycode.org/
      */
-    public InternationalPhoneTextWatcher(Context context, String countryNameCode, int countryPhoneCode) {
-        this(context, countryNameCode, countryPhoneCode, true);
+    public InternationalPhoneTextWatcher(Context context, String countryNameCode, int countryPhoneCode, PhoneNumberUtil phoneNumberUtil) {
+        this(context, countryNameCode, countryPhoneCode, true, phoneNumberUtil);
     }
 
     /**
@@ -53,10 +53,10 @@ public class InternationalPhoneTextWatcher implements TextWatcher {
      * @param internationalOnly Specifies whether numbers should only be formatted if they are
      *                          international vs national
      */
-    public InternationalPhoneTextWatcher(Context context, String countryNameCode, int countryPhoneCode, boolean internationalOnly) {
+    public InternationalPhoneTextWatcher(Context context, String countryNameCode, int countryPhoneCode, boolean internationalOnly, PhoneNumberUtil phoneNumberUtil) {
         if (countryNameCode == null || countryNameCode.length() == 0)
             throw new IllegalArgumentException();
-        phoneNumberUtil = PhoneNumberUtil.getInstance();
+        this.phoneNumberUtil = phoneNumberUtil;
         updateCountry(countryNameCode, countryPhoneCode);
         this.internationalOnly = internationalOnly;
     }

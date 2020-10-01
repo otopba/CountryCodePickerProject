@@ -29,15 +29,16 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import io.michaelrocks.libphonenumber.android.NumberParseException;
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
+import io.michaelrocks.libphonenumber.android.Phonenumber;
 
 /**
  * Created by hbb20 on 11/1/16.
@@ -972,7 +973,7 @@ public class CountryCodePicker extends RelativeLayout {
             }
 
             if (numberAutoFormattingEnabled) {
-                formattingTextWatcher = new InternationalPhoneTextWatcher(context, getSelectedCountryNameCode(), getSelectedCountryCodeAsInt(), internationalFormattingOnly);
+                formattingTextWatcher = new InternationalPhoneTextWatcher(context, getSelectedCountryNameCode(), getSelectedCountryCodeAsInt(), internationalFormattingOnly, getPhoneUtil());
                 editText_registeredCarrierNumber.addTextChangedListener(formattingTextWatcher);
             }
 
@@ -2177,7 +2178,7 @@ public class CountryCodePicker extends RelativeLayout {
 
     private PhoneNumberUtil getPhoneUtil() {
         if (phoneUtil == null) {
-            phoneUtil = PhoneNumberUtil.getInstance();
+            phoneUtil = PhoneNumberUtil.createInstance(context);
         }
         return phoneUtil;
     }

@@ -65,7 +65,6 @@
             android:adjustViewBounds="true"
             android:tint="@android:color/black"
             android:alpha="0.6"
-            app:srcCompat="@drawable/ccp_ic_arrow_drop_down"
             />
     </RelativeLayout>
 </RelativeLayout>
