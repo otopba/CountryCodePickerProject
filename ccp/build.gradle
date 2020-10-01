@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/hbb20/CountryCodePickerProject'
     gitUrl = 'https://github.com/hbb20/CountryCodePickerProject.git'
 
-    libraryVersion = '2.4.0-minimized'
+    libraryVersion = '2.4.1-minimized'
 
     developerId = 'hbb20'
     developerName = 'Harsh Bhakta'
@@ -27,11 +27,11 @@ ext {
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -41,7 +41,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
     tasks.withType(Javadoc).all { enabled = false }
 }
 
@@ -53,7 +55,7 @@ dependencies {
     implementation('com.futuremind.recyclerfastscroll:fastscroll:0.2.5', {
         exclude group: 'com.android.support'
     })
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.21'
+    implementation 'io.michaelrocks:libphonenumber-android:8.12.10'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

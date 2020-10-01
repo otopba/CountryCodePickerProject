@@ -1,4 +1,4 @@
-Country Code Picker Library
+Country Code Picker Library ![ViewCount](https://views.whatilearened.today/views/github/hbb20/CountryCodePickerProject.svg)
 ===========================
 
 If you are looking for an android library for Country Selector or Country Spinner or Country Phone Code selector, this is the perfect place for you.
